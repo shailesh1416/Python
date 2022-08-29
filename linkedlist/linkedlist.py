@@ -4,51 +4,50 @@ class ListNode:
         self.next = None
 
 
-def traversal(head):
-    curnode = head
-    while curnode is not None:
-        print(curnode.data)
-        curnode = curnode.next
+class LinkedList:
+    def __init__(self):
+        self.head = None
 
-# unordered linked-list => find a target
+    def addItem(self, item):
+        newNode = ListNode(item)
+        newNode.next = self.head
+        self.head = newNode
 
+    def traversal(self):
+        curnode = self.head
+        while curnode is not None:
+            print(curnode.data)
+            curnode = curnode.next
 
-def unorderedSearch(head, target):
-    curnode = head
-    while curnode is not None and curnode != target:
-        curnode = curnode.next
-    return curnode is not None
+    # unordered linked-list => find a target
+    def unorderedSearch(self, target):
+        curnode = self.head
+        while curnode is not None and curnode != target:
+            curnode = curnode.next
+        if curnode is None:
+            return False
+        return True
 
+    def remove(self, target):
+        preNode = None
+        curnode = self.head
+        while curnode is not None and curnode.data != target:
+            curnode = curnode.next
+            preNode = curnode
 
-def addItem(head, item):
-    newNode = ListNode(item)
-    newNode.next = head
-    head = newNode
-    return head
+        if curnode is not None:
+            if curnode is self.head:
+                self.head = curnode.next
+            else:
+                preNode.next = curnode.next
 
-
-'''def remove(head, target):
-    preNode = None
-    curnode = head
-    while curnode is not None and curnode.data != target:
-        curnode = curnode.next
-        preNode = curnode
-
-    if curnode is not None:
-        if curnode is head:
-            head = curnode.next
-        else:
-            preNode = curnode.next
-'''
 
 if __name__ == '__main__':
-    head = ListNode("India")
-    n2 = ListNode("Pakistan")
-    n3 = ListNode("Afganistan")
-    n4 = ListNode("Turky")
+    llist = LinkedList()
+    llist.addItem("India")
+    llist.addItem("Pakistan")
+    llist.addItem("Afganistan")
+    llist.addItem("Iran")
 
-    head.next = n2
-    n2.next = n3
-    n3.next = n4
-    head = addItem(head, "Bangladesh")
-    traversal(head)
+    llist.remove('Afganistan')
+    llist.traversal()

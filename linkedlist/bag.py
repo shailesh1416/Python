@@ -82,7 +82,7 @@ class _BagIterator:
 
 
 if __name__ == "__main__":
-    bag = Bag()
+    bag = Bag()d
     bag.add(11)
     bag.add(22)
     bag.add(36)

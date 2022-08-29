@@ -16,7 +16,6 @@ class LineSegment:
     def __init__(self, a, b):
         self.a = a
         self.b = b
-        print("Line segment Created")
 
     def __str__(self):
         return f"({self.a.x},{self.a.y}),({self.b.x},{self.b.y})"

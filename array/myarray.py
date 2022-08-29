@@ -50,7 +50,7 @@ class _ArrayIterator:
             raise StopIteration
 
 
-class array2D:
+class Array2D:
     # Create 2D of size numRows x numCols.
     def __init__(self, numRows, numCols):
         # Create a 1-D array to store an array referene for 1D arrays
@@ -62,11 +62,11 @@ class array2D:
 
     # Returns the number of columns in the 2-D array
     def numRows(self):
-        return len(self._theRows)
+        return self._theRows._size
 
     # Returns the number of the columns in the 2-D array
     def numCols(self):
-        return len(self._theRows[0])
+        return self._theRows[0]._size
 
     # Clear the array by setting every element to a given value
     def clear(self, value):

@@ -8,62 +8,40 @@ class Queue:
         self.size = 0
         self.front = 0
         self.back = -1
-        self.max_size = max_size
 
     # Return the occupied length of queue
     def length(self):
         return self.size
 
-    # Enqueue an item into the queue
-    def enqueue(self, item):
-        if self.size != self.max_size:
-            if self.back < self.max_size-1:
-                if self.back == self.front:
-                    self.back
-                self.back += 1
-                self.size += 1
-                self.items[self.back] = item
-                print(
-                    f'front = {self.front},back = {self.back}, size = {self.size}')
-            else:
-                self.back = 0
-                self.size += 1
-                self.items[self.back] = item
-                print(
-                    f'front = {self.front},back = {self.back}, size = {self.size}')
+    def isEmpty(self):
+        return self.size == 0
 
-        else:
-            print(self.front, self.back)
-            print("Queue is full, enqueue to ")
+    def isFull(self):
+        return self.size == len(self.items)
+
+    def __len__(self):
+        return self.size
+
+    # Enqueue an item into the queue
+
+    def enqueue(self, item):
+        assert not self.isFull(), "Cannot enqueue in a full queue"
+        max_size = len(self.items)
+        self.back = (self.back+1) % max_size
+        self.items[self.back] = item
+        self.items += 1
 
     # Dequeue and increment the front
 
     def dequeue(self):
-        if self.length() > 0:
-            if self.front < self.max_size:
-                temp = self.items[self.front]
-                self.size -= 1
-                self.items[self.front] = None
-                if self.front + 1 == self.max_size:
-                    self.front = 0
-                else:
-                    self.front += 1
-                print(
-                    f'front = {self.front},back = {self.back}, size = {self.size} dequeued = {temp}')
-                return temp
-            else:
-                self.front = 0
-                temp = self.items[self.front]
-                self.items[self.front] = None
-                self.size -= 1
-                print(
-                    f'front = {self.front},back = {self.back}, size = {self.size} dequeued = {temp}')
-                return temp
+        assert not self.isEmpty(), "Cannot dequeue from an empty queue"
+        item = self.items[self.front]
+        maxSize = len(self.items)
+        self.front = (self.front+1) % maxSize
+        self.size -= 1
+        return item
 
-        else:
-            print("Queue is empty")
-            return -1
-
+    # prints item in list
     def draw(self):
         for i in self.items:
             print(i, end=' ')
